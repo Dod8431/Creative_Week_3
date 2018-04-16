@@ -219,7 +219,7 @@ Transform:
   m_Children:
   - {fileID: 1982454157}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!114 &501755496
 MonoBehaviour:
@@ -325,6 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d7b5a72009816e47951cccae48ed7b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  smoothSpeed: 0.5
 --- !u!81 &805076872
 AudioListener:
   m_ObjectHideFlags: 0
@@ -386,7 +387,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 60, y: 0, z: 0}
 --- !u!1001 &1252815493
 Prefab:
@@ -566,7 +567,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1324456439
 MonoBehaviour:
@@ -725,7 +726,7 @@ Transform:
   m_Children:
   - {fileID: 1350572930}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1982454156
 GameObject:
