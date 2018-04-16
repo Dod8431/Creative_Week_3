@@ -11,8 +11,9 @@ public class Player : MonoBehaviour {
     float angle;
     // Use this for initialization
     void Start () {
-        Weapon = GameObject.Find("Gun");
+        /*Weapon = GameObject.Find("Gun");
         Weapon.transform.rotation = Quaternion.Euler(0f, 0f, 90);
+        */
     }
 
     // Update is called once per frame
@@ -22,8 +23,8 @@ public class Player : MonoBehaviour {
 
         ///////////////// Move /////////////////////
         float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        transform.Translate(new Vector3(x, y, 0) * speed);
+        float z = Input.GetAxis("Vertical");
+        transform.Translate(new Vector3(x, 0, z) * speed);
 
         ///////////////// Aim /////////////////////
         float xaim = Input.GetAxis("Horizontal1");
@@ -35,9 +36,10 @@ public class Player : MonoBehaviour {
             lastAngle = Weapon.transform.rotation;
         }
         else
-        {
+        /*{
             Weapon.transform.rotation = lastAngle;
         }
+        */
 
         ///////////////// Shoot /////////////////////
 
