@@ -51,6 +51,8 @@ public class Player : MonoBehaviour {
         playersp = player.GetComponent<SpriteRenderer>();
         gun = GameObject.Find("gunModel");
         gunsp = gun.GetComponent<SpriteRenderer>();
+       lastAngle = Quaternion.Euler(90, 180, 180);
+        //Flip(gun);
 
     }
 
@@ -78,12 +80,12 @@ public class Player : MonoBehaviour {
         if (xaim != 0 && yaim != 0)
         {
             angle = Mathf.Atan2(xaim, yaim) * Mathf.Rad2Deg;
-            Weapon.transform.rotation = Quaternion.Euler(90, 0f, angle );
-            lastAngle = Weapon.transform.rotation;
+            gun.transform.rotation = Quaternion.Euler(90, 180, angle +90);
+            lastAngle = gun.transform.rotation;
         }
         else
         {
-            Weapon.transform.rotation = lastAngle;
+            gun.transform.rotation = lastAngle;
         }
 
         if (yaim > 0)
@@ -199,7 +201,7 @@ public class Player : MonoBehaviour {
             canshoot = false;
             GameObject clone;
             Quaternion dirBullet;
-            dirBullet = Quaternion.Euler(60, 0f, angle);
+            dirBullet = Quaternion.Euler(60, 0f, angle + 90);
             clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
             clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.right * Random.Range(-5.0f, 5.0f));
             StartCoroutine(DestroyBullet(clone));
@@ -215,33 +217,33 @@ public class Player : MonoBehaviour {
             canshoot = false;
             GameObject clone;
             Quaternion dirBullet;
-            dirBullet = Quaternion.Euler(60, 0f, angle);
+            dirBullet = Quaternion.Euler(60, 0f, angle+90);
             clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
-            clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed)+ Weapon.transform.TransformDirection(Vector3.right * Random.Range(-5.0f, 5.0f));
+            clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed)+ Weapon.transform.TransformDirection(Vector3.forward * Random.Range(-5.0f, 5.0f));
             ///
             GameObject clone1;
             Quaternion dirBullet1;
-            dirBullet1 = Quaternion.Euler(60, 0f, angle);
+            dirBullet1 = Quaternion.Euler(60, 0f, angle + 90);
             clone1 = Instantiate(Bullet, Weapon.transform.position, dirBullet1) as GameObject;
-            clone1.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed)+ Weapon.transform.TransformDirection(Vector3.right* Random.Range(5.0f, 18.0f));
+            clone1.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed)+ Weapon.transform.TransformDirection(Vector3.forward * Random.Range(5.0f, 18.0f));
             ///
             GameObject clone2;
             Quaternion dirBullet2;
-            dirBullet2 = Quaternion.Euler(60, 0f, angle);
+            dirBullet2 = Quaternion.Euler(60, 0f, angle + 90);
             clone2 = Instantiate(Bullet, Weapon.transform.position, dirBullet2) as GameObject;
-            clone2.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.left* Random.Range(5.0f, 18.0f));
+            clone2.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.back* Random.Range(5.0f, 18.0f));
             ///
             GameObject clone3;
             Quaternion dirBullet3;
-            dirBullet3 = Quaternion.Euler(60, 0f, angle);
+            dirBullet3 = Quaternion.Euler(60, 0f, angle + 90);
             clone3 = Instantiate(Bullet, Weapon.transform.position, dirBullet3) as GameObject;
-            clone3.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.left * Random.Range(22.0f, 30.0f));
+            clone3.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.back * Random.Range(22.0f, 30.0f));
             ///
             GameObject clone4;
             Quaternion dirBullet4;
-            dirBullet4 = Quaternion.Euler(60, 0f, angle);
+            dirBullet4 = Quaternion.Euler(60, 0f, angle + 90);
             clone4 = Instantiate(Bullet, Weapon.transform.position, dirBullet4) as GameObject;
-            clone4.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.right * Random.Range(22.0f, 30.0f));
+            clone4.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.forward * Random.Range(22.0f, 30.0f));
             //
             //transform.Translate(-Weapon.transform.TransformDirection(Vector3.right * 0.2f));
 
@@ -262,7 +264,7 @@ public class Player : MonoBehaviour {
             canshoot = false;
             GameObject clone;
             Quaternion dirBullet;
-            dirBullet = Quaternion.Euler(60, 0f, angle);
+            dirBullet = Quaternion.Euler(60, 0f, angle+90);
             clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
             clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.right * Random.Range(-5.0f, 5.0f));
             //transform.Translate(-Weapon.transform.TransformDirection(Vector3.up * 1));
@@ -357,7 +359,7 @@ public class Player : MonoBehaviour {
     void Flip(GameObject swap)
     {
         Vector3 theScale = swap.transform.localScale;
-        theScale.x *= -1;
+        theScale.y *= -1;
         swap.transform.localScale = theScale;
     }
 }
