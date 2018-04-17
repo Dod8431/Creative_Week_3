@@ -12,6 +12,15 @@ public class Player : MonoBehaviour {
     bool canshoot = true;
     int plank = 0;
     public int life=3;
+    GameObject player;
+    GameObject gun;
+    SpriteRenderer gunsp;
+    SpriteRenderer playersp;
+    public Sprite backplayer;
+    public Sprite machete;
+    public Sprite pistol;
+    public Sprite shotgun;
+    public Sprite minigun;
 
     ///////// Weapons /////////
     /*bool CAC = true;
@@ -32,7 +41,11 @@ public class Player : MonoBehaviour {
     void Start () {
         Weapon = GameObject.Find("Gun");
         Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
-        
+        player = GameObject.Find("Model");
+        playersp = player.GetComponent<SpriteRenderer>();
+        gun = GameObject.Find("gunModel");
+        gunsp = gun.GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
@@ -60,7 +73,25 @@ public class Player : MonoBehaviour {
         {
             Weapon.transform.rotation = lastAngle;
         }
-        
+
+        if (xaim > 0)
+        {
+            playersp.sprite = backplayer;
+            gunsp.sortingOrder = 1;
+        }
+        else
+        {
+            gunsp.sortingOrder = 3;
+        }
+
+        if (xaim > 0)
+        {
+            playersp.flipX = true;
+            gun.transform.localScale = gun.transform.localScale + Vector3.left;
+        }else
+        {
+            playersp.flipX = false;
+        }
 
         ///////////////// Shoot /////////////////////
 
@@ -88,6 +119,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetAxis("VerticalPad") > 0)
             {
+            gunsp.sprite = machete;
             Debug.Log("cac");
             CACSelect = true;
             ARSelect = false;
@@ -96,6 +128,7 @@ public class Player : MonoBehaviour {
         }
         if (Input.GetAxis("VerticalPad") < 0)
             {
+            gunsp.sprite = shotgun;
             Debug.Log("ar");
             CACSelect = false;
             ARSelect = true;
@@ -105,6 +138,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetAxis("HorizontalPad") > 0)
             {
+            gunsp.sprite = pistol;
             Debug.Log("pistol");
             CACSelect = false;
             ARSelect = false;
@@ -114,6 +148,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetAxis("HorizontalPad") < 0)
             {
+            gunsp.sprite = minigun;
             Debug.Log("mg");
             CACSelect = false;
             ARSelect = false;
@@ -239,6 +274,7 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag =="Plank")
         {
             plank += 1;
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.tag == "AmmoPistol")
