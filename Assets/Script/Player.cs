@@ -64,7 +64,16 @@ public class Player : MonoBehaviour {
     {
 		// ANIM //
 		 
-		modelAnim.SetFloat ("Run", Mathf.Abs (Input.GetAxis ("Horizontal")));
+		modelAnim.SetFloat ("Run", Mathf.Abs(Input.GetAxis ("Horizontal")));
+		modelAnim.SetFloat ("Aim", Input.GetAxis ("Vertical1"));
+		if (Input.GetAxis ("Horizontal") > 0.01f) {
+			playersp.flipX = true;
+		}
+
+		if (Input.GetAxis ("Horizontal") < -0.01f) {
+			playersp.flipX = false;
+		}
+
 
 		//
 
@@ -79,7 +88,7 @@ public class Player : MonoBehaviour {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-		transform.Translate (new Vector3 (x, 0, z) * (speed * Mathf.Abs(Input.GetAxis("Horizontal"))));
+		transform.Translate (new Vector3 (x, 0, z) * speed);
 
 
         ///////////////// Aim /////////////////////
@@ -110,7 +119,7 @@ public class Player : MonoBehaviour {
         if (xaim > 0 && !facingRight)
         {
             facingRight = !facingRight;
-            playersp.flipX = true;
+            playersp.flipX = false;
             Flip(gun);
         }
         else
@@ -118,7 +127,7 @@ public class Player : MonoBehaviour {
             if (xaim < 0 && facingRight)
             {
                 facingRight = !facingRight;
-                playersp.flipX = false;
+                playersp.flipX = true;
                 Flip(gun);
             }
         }
