@@ -14,10 +14,10 @@ public class Player : MonoBehaviour {
     public int life=3;
 
     ///////// Weapons /////////
-    bool CAC = true;
+    /*bool CAC = true;
     bool Pistol = false;
     bool AR = false;
-    bool MiniGun = false;
+    bool MiniGun = false;*/
 
     bool CACSelect = true;
     bool Pistolselect = false;
@@ -239,12 +239,6 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag =="Plank")
         {
             plank += 1;
-        }
-
-         if (other.gameObject.tag =="Plank")
-        {
-            plank += 3;
-            Destroy(other.gameObject);
         }
 
         if (other.gameObject.tag == "AmmoPistol")
