@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour {
+public class PlayerDod : MonoBehaviour {
     public float speed;
     public float bulletspeed;
     GameObject Weapon;
@@ -77,7 +77,7 @@ public class Player : MonoBehaviour {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
-		transform.Translate (new Vector3 (x, 0, z) * (speed * Mathf.Abs(Input.GetAxis("Horizontal"))));
+		transform.Translate (new Vector3 (x, 0, z) * speed);
 
 
         ///////////////// Aim /////////////////////
