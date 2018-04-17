@@ -11,4 +11,12 @@ public class SpriteShadow : MonoBehaviour {
 
 	private Transform transCaster;
 	private Transform transShadow;
+
+	void Start()
+	{
+		transCaster = transform;
+		transShadow = new GameObject ().transform;
+		transShadow.parent = transCaster;
+		transShadow.gameObject.name = "shadow";
+	}
 }
