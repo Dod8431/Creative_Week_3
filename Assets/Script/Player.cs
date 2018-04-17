@@ -28,8 +28,11 @@ public class Player : MonoBehaviour {
     public int ammoAR =100;
     public int ammoMG =200;
 
+	private Animator modelAnim;
+
     // Use this for initialization
     void Start () {
+		modelAnim = this.GetComponentInChildren<Animator> ();
         Weapon = GameObject.Find("Gun");
         Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
         
@@ -44,7 +47,12 @@ public class Player : MonoBehaviour {
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
-        transform.Translate(new Vector3(x, 0, z) * speed);
+		if (x > 0 || z > 0) {
+			modelAnim.SetBool ("run", true);
+		} else {
+			modelAnim.SetBool ("run", false);
+		}
+		transform.Translate (new Vector3 (x, 0, z) * speed);
 
         ///////////////// Aim /////////////////////
 
