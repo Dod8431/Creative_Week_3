@@ -5,6 +5,10 @@ using UnityEngine;
 public class Game_Manager : MonoBehaviour {
     public bool day = true;
     public bool night = false;
+    bool startday = false;
+    bool startnight = true;
+    public GameObject player;
+    public int daynumb;
 
 
 	// Use this for initialization
@@ -16,10 +20,10 @@ public class Game_Manager : MonoBehaviour {
 	void Update () {
         if (day)
         {
-
+            Dayfunction();
         }else
         {
-
+            Nightfunction();
         }
 		
 	}
@@ -33,16 +37,33 @@ public class Game_Manager : MonoBehaviour {
 
     void Dayfunction()
     {
-
-
-        StartCoroutine ("Cycle");
+        if (startday == true)
+        {
+            Debug.Log("jour");
+            daynumb += 1;
+            startday = false;
+            player.GetComponent<Player>().life = 3;
+            StartCoroutine("Cycle");
+            startnight = true;
+            player.GetComponent<Player>().doorout = false;
+            player.GetComponent<Player>().doorin = true;
+        }
     }
 
     void Nightfunction()
     {
-
-
-        StartCoroutine("Cycle");
+        if(startnight == true)
+        {
+            Debug.Log("nuit");
+            startnight = false;
+            player.transform.position = new Vector3(0, 0, 0);
+            StartCoroutine("Cycle");
+            startday = true;
+            player.GetComponent<Player>().doorout = true;
+            player.GetComponent<Player>().doorin = false;
+        }
+        
+        
     }
 
 }
