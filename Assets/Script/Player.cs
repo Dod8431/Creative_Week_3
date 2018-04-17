@@ -12,6 +12,21 @@ public class Player : MonoBehaviour {
     bool canshoot = true;
     int plank = 0;
     public int life=3;
+    GameObject player;
+    GameObject gun;
+    SpriteRenderer gunsp;
+    SpriteRenderer playersp;
+    public Sprite backplayer;
+    public Sprite machete;
+    public Sprite pistol;
+    public Sprite shotgun;
+    public Sprite minigun;
+    float timer = 2;
+    bool facingRight;
+    public bool construct = false;
+    bool activate = false;
+    public bool doorin;
+    public bool doorout;
 
     ///////// Weapons /////////
     /*bool CAC = true;
@@ -35,15 +50,24 @@ public class Player : MonoBehaviour {
 		modelAnim = this.GetComponentInChildren<Animator> ();
         Weapon = GameObject.Find("Gun");
         Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
-        
+        player = GameObject.Find("Model");
+        playersp = player.GetComponent<SpriteRenderer>();
+        gun = GameObject.Find("gunModel");
+        gunsp = gun.GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (activate == true)
+        {
+            timer -= Time.deltaTime;
+            Debug.Log(timer);
+        }
 
         ///////////////// Move /////////////////////
+<<<<<<< HEAD
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
@@ -53,6 +77,14 @@ public class Player : MonoBehaviour {
 			modelAnim.SetBool ("run", false);
 		}
 		transform.Translate (new Vector3 (x, 0, z) * speed);
+=======
+        if (activate == false)
+        {
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            transform.Translate(new Vector3(x, 0, z) * speed);
+        }
+>>>>>>> e0754febf2b2db4da047e83dcaf7250361b9b51e
 
         ///////////////// Aim /////////////////////
 
@@ -68,7 +100,32 @@ public class Player : MonoBehaviour {
         {
             Weapon.transform.rotation = lastAngle;
         }
-        
+
+        if (yaim > 0)
+        {
+            playersp.sprite = backplayer;
+            gunsp.sortingOrder = 5;
+        }
+        else
+        {
+            gunsp.sortingOrder = 15;
+        }
+
+        if (xaim > 0 && !facingRight)
+        {
+            facingRight = !facingRight;
+            playersp.flipX = true;
+            Flip(gun);
+        }
+        else
+        {
+            if (xaim < 0 && facingRight)
+            {
+                facingRight = !facingRight;
+                playersp.flipX = false;
+                Flip(gun);
+            }
+        }
 
         ///////////////// Shoot /////////////////////
 
@@ -96,6 +153,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetAxis("VerticalPad") > 0)
             {
+            gunsp.sprite = machete;
             Debug.Log("cac");
             CACSelect = true;
             ARSelect = false;
@@ -104,6 +162,7 @@ public class Player : MonoBehaviour {
         }
         if (Input.GetAxis("VerticalPad") < 0)
             {
+            gunsp.sprite = shotgun;
             Debug.Log("ar");
             CACSelect = false;
             ARSelect = true;
@@ -113,6 +172,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetAxis("HorizontalPad") > 0)
             {
+            gunsp.sprite = pistol;
             Debug.Log("pistol");
             CACSelect = false;
             ARSelect = false;
@@ -122,6 +182,7 @@ public class Player : MonoBehaviour {
 
         if (Input.GetAxis("HorizontalPad") < 0)
             {
+            gunsp.sprite = minigun;
             Debug.Log("mg");
             CACSelect = false;
             ARSelect = false;
@@ -246,7 +307,8 @@ public class Player : MonoBehaviour {
 
         if (other.gameObject.tag =="Plank")
         {
-            plank += 1;
+            plank += 3;
+            Destroy(other.gameObject);
         }
 
         if (other.gameObject.tag == "AmmoPistol")
@@ -266,5 +328,51 @@ public class Player : MonoBehaviour {
             ammoMG += 25;
             Destroy(other.gameObject);
         }
+
+        if (other.gameObject.tag == "Doorin"&& doorin)
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
+        if (other.gameObject.tag == "Doorout" && doorout)
+        {
+            transform.position = new Vector3(0, 0, 0);
+        }
+    }
+
+    void OnTriggerStay (Collider other)
+    {
+        
+        if (other.gameObject.tag == "Barricade" && construct == false && plank>2)
+        {
+            Debug.Log("bonjour");
+            if (Input.GetButtonDown("Fire1"))
+            {
+                activate = true;
+                
+            }
+
+            if (Input.GetButtonUp("Fire1")&&construct==false)
+            {
+                activate = false;
+                timer = 2;
+                Debug.Log("cancel");
+            }
+            if (timer <= 0)
+            {
+                activate = false;
+                Debug.Log("bravo");
+                construct = true;
+                timer = 2;
+                plank -= 3;
+            }
+        }
+        
+    }
+
+    void Flip(GameObject swap)
+    {
+        Vector3 theScale = swap.transform.localScale;
+        theScale.x *= -1;
+        swap.transform.localScale = theScale;
     }
 }
