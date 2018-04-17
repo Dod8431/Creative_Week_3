@@ -115,6 +115,7 @@ NavMeshSettings:
   m_NavMeshData: {fileID: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 --- !u!1 &61563303
 GameObject:
@@ -202,6 +203,8 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 =======
 >>>>>>> parent of 0812893... bonsoir
+=======
+>>>>>>> parent of 0812893... bonsoir
 --- !u!1 &202676039
 GameObject:
   m_ObjectHideFlags: 0
@@ -286,6 +289,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 <<<<<<< HEAD
 --- !u!1 &275529492
 GameObject:
@@ -372,6 +376,8 @@ Transform:
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 >>>>>>> 3e190f511d5821fe7e106c338cfb88b9f20922f7
+=======
+>>>>>>> parent of 0812893... bonsoir
 =======
 >>>>>>> parent of 0812893... bonsoir
 --- !u!1 &501755493
@@ -812,6 +818,7 @@ Transform:
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!1 &1307746167
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +904,8 @@ Transform:
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 >>>>>>> 3e190f511d5821fe7e106c338cfb88b9f20922f7
+=======
+>>>>>>> parent of 0812893... bonsoir
 =======
 >>>>>>> parent of 0812893... bonsoir
 --- !u!1 &1324456436
@@ -1768,8 +1777,12 @@ Tilemap:
 =======
       m_TileIndex: 7
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_TileSpriteIndex: 16
 >>>>>>> 3e190f511d5821fe7e106c338cfb88b9f20922f7
+=======
+      m_TileSpriteIndex: 7
+>>>>>>> parent of 0812893... bonsoir
 =======
       m_TileSpriteIndex: 7
 >>>>>>> parent of 0812893... bonsoir
@@ -1930,8 +1943,12 @@ Tilemap:
 =======
       m_TileIndex: 6
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_TileSpriteIndex: 15
 >>>>>>> 3e190f511d5821fe7e106c338cfb88b9f20922f7
+=======
+      m_TileSpriteIndex: 6
+>>>>>>> parent of 0812893... bonsoir
 =======
       m_TileSpriteIndex: 6
 >>>>>>> parent of 0812893... bonsoir
@@ -2920,8 +2937,12 @@ Tilemap:
 =======
       m_TileIndex: 4
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_TileSpriteIndex: 14
 >>>>>>> 3e190f511d5821fe7e106c338cfb88b9f20922f7
+=======
+      m_TileSpriteIndex: 4
+>>>>>>> parent of 0812893... bonsoir
 =======
       m_TileSpriteIndex: 4
 >>>>>>> parent of 0812893... bonsoir
@@ -3082,8 +3103,12 @@ Tilemap:
 =======
       m_TileIndex: 5
 <<<<<<< HEAD
+<<<<<<< HEAD
       m_TileSpriteIndex: 13
 >>>>>>> 3e190f511d5821fe7e106c338cfb88b9f20922f7
+=======
+      m_TileSpriteIndex: 5
+>>>>>>> parent of 0812893... bonsoir
 =======
       m_TileSpriteIndex: 5
 >>>>>>> parent of 0812893... bonsoir
@@ -3423,8 +3448,11 @@ Tilemap:
     m_Data: {fileID: 21300032, guid: a69ff64538a842f48bd9f9ae467b0f44, type: 3}
   - m_RefCount: 30
     m_Data: {fileID: 21300028, guid: a69ff64538a842f48bd9f9ae467b0f44, type: 3}
+<<<<<<< HEAD
   - m_RefCount: 0
     m_Data: {fileID: 0}
+=======
+>>>>>>> parent of 0812893... bonsoir
   - m_RefCount: 0
     m_Data: {fileID: 0}
 <<<<<<< HEAD
@@ -3443,10 +3471,13 @@ Tilemap:
     m_Data: {fileID: 21300000, guid: a69ff64538a842f48bd9f9ae467b0f44, type: 3}
   - m_RefCount: 0
     m_Data: {fileID: 0}
+<<<<<<< HEAD
   - m_RefCount: 17
     m_Data: {fileID: 21300032, guid: a69ff64538a842f48bd9f9ae467b0f44, type: 3}
   - m_RefCount: 30
     m_Data: {fileID: 21300028, guid: a69ff64538a842f48bd9f9ae467b0f44, type: 3}
+=======
+>>>>>>> parent of 0812893... bonsoir
 =======
 >>>>>>> parent of 0812893... bonsoir
   - m_RefCount: 0
