@@ -43,31 +43,21 @@ public class Player : MonoBehaviour {
     public int ammoAR =100;
     public int ammoMG =200;
 
-	private Animator modelAnim;
-
     // Use this for initialization
     void Start () {
-		modelAnim = this.GetComponentInChildren<Animator> ();
         Weapon = GameObject.Find("Gun");
         Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
         player = GameObject.Find("Model");
         playersp = player.GetComponent<SpriteRenderer>();
         gun = GameObject.Find("gunModel");
         gunsp = gun.GetComponent<SpriteRenderer>();
-       lastAngle = Quaternion.Euler(90, 180, 180);
-        //Flip(gun);
+        lastAngle = Quaternion.Euler(90, 180, 180);
 
     }
 
     // Update is called once per frame
     void Update()
     {
-		// ANIM //
-		 
-		modelAnim.SetFloat ("Run", Mathf.Abs (Input.GetAxis ("Horizontal")));
-
-		//
-
         if (activate == true)
         {
             timer -= Time.deltaTime;
@@ -75,12 +65,12 @@ public class Player : MonoBehaviour {
         }
 
         ///////////////// Move /////////////////////
-
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-		transform.Translate (new Vector3 (x, 0, z) * (speed * Mathf.Abs(Input.GetAxis("Horizontal"))));
-
+        if (activate == false)
+        {
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+            transform.Translate(new Vector3(x, 0, z) * speed);
+        }
 
         ///////////////// Aim /////////////////////
 
