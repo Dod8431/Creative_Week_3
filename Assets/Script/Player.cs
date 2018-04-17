@@ -58,6 +58,24 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
+=======
+		// ANIM //
+		 
+		modelAnim.SetFloat ("Run", Mathf.Abs(Input.GetAxis ("Horizontal")));
+		modelAnim.SetFloat ("Aim", Input.GetAxis ("Vertical1"));
+		if (Input.GetAxis ("Horizontal") > 0.01f) {
+			playersp.flipX = true;
+		}
+
+		if (Input.GetAxis ("Horizontal") < -0.01f) {
+			playersp.flipX = false;
+		}
+
+
+		//
+
+>>>>>>> f14ac91529e82119dfda14bb30856ffd12ee6110
         if (activate == true)
         {
             timer -= Time.deltaTime;
@@ -65,12 +83,21 @@ public class Player : MonoBehaviour {
         }
 
         ///////////////// Move /////////////////////
+<<<<<<< HEAD
         if (activate == false)
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             transform.Translate(new Vector3(x, 0, z) * speed);
         }
+=======
+
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
+
+		transform.Translate (new Vector3 (x, 0, z) * speed);
+
+>>>>>>> f14ac91529e82119dfda14bb30856ffd12ee6110
 
         ///////////////// Aim /////////////////////
 
@@ -100,7 +127,7 @@ public class Player : MonoBehaviour {
         if (xaim > 0 && !facingRight)
         {
             facingRight = !facingRight;
-            playersp.flipX = true;
+            playersp.flipX = false;
             Flip(gun);
         }
         else
@@ -108,7 +135,7 @@ public class Player : MonoBehaviour {
             if (xaim < 0 && facingRight)
             {
                 facingRight = !facingRight;
-                playersp.flipX = false;
+                playersp.flipX = true;
                 Flip(gun);
             }
         }
