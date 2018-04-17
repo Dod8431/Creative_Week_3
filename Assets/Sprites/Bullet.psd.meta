@@ -46,7 +46,11 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+<<<<<<< HEAD
   spritePixelsToUnits: 3
+=======
+  spritePixelsToUnits: 1
+>>>>>>> d939791f94ab606bac6013ede24479bdf05a1f52
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -76,6 +80,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+<<<<<<< HEAD
   - buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -86,6 +91,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+=======
+>>>>>>> d939791f94ab606bac6013ede24479bdf05a1f52
   spriteSheet:
     serializedVersion: 2
     sprites: []
