@@ -9,6 +9,7 @@ TagManager:
   - AmmoSG
   - AmmoMG
   - Zombie
+  - Barricade
   layers:
   - Default
   - TransparentFX
