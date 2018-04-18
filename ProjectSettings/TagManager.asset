@@ -10,6 +10,7 @@ TagManager:
   - AmmoMG
   - Zombie
   - Barricade
+  - Bullet
   layers:
   - Default
   - TransparentFX

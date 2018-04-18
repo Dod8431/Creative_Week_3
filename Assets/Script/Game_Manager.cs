@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Game_Manager : MonoBehaviour {
     public bool day = true;
@@ -9,7 +10,9 @@ public class Game_Manager : MonoBehaviour {
     bool startnight = true;
     public GameObject player;
     public int daynumb;
-
+    public Text daytxt;
+    public int killnum;
+    public Text killtxt;
 
 	// Use this for initialization
 	void Start () {
@@ -25,8 +28,8 @@ public class Game_Manager : MonoBehaviour {
         {
             Nightfunction();
         }
-		
-	}
+        killtxt.text = ""+killnum;
+    }
 
     IEnumerator Cycle()
     {
@@ -41,6 +44,7 @@ public class Game_Manager : MonoBehaviour {
         {
             Debug.Log("jour");
             daynumb += 1;
+            daytxt.text = "Day " + daynumb;
             startday = false;
 <<<<<<< HEAD
 			player.GetComponent<PlayerDod>().life = 3;

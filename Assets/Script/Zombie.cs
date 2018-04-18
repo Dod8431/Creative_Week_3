@@ -16,21 +16,22 @@ public class Zombie : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (this.transform.position.x < player.transform.position.x)
+		/*if (this.transform.position.x < player.transform.position.x)
         {
             zombiesp.flipX = true;
         }
         else
         {
             zombiesp.flipX = false;
-        }
+        }*/
 
         if (vie <= 0)
         {
+            GC.GetComponent<Game_Manager>().killnum += 1;
             Destroy(this.gameObject);
         }
         
-        if (GetComponent<Game_Manager>().day == true)
+        if (GC.GetComponent<Game_Manager>().day == true)
         {
             StartCoroutine(Burn());
         }
@@ -41,6 +42,7 @@ public class Zombie : MonoBehaviour {
         if(other.gameObject.tag == "Bullet")
         {
             vie -= 1;
+            Destroy(other.gameObject);
         }
     }
 
