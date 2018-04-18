@@ -27,6 +27,7 @@ public class Player : MonoBehaviour {
     bool activate = false;
     public bool doorin;
     public bool doorout;
+    private Animator modelAnim;
 
     ///////// Weapons /////////
     /*bool CAC = true;
@@ -45,6 +46,7 @@ public class Player : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        modelAnim = this.GetComponentInChildren<Animator>();
         Weapon = GameObject.Find("Gun");
         Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
         player = GameObject.Find("Model");
@@ -60,8 +62,8 @@ public class Player : MonoBehaviour {
     {
 		// ANIM //
 		 
-		modelAnim.SetFloat ("Run", Mathf.Abs(Input.GetAxis ("Horizontal")));
-		modelAnim.SetFloat ("Aim", Input.GetAxis ("Vertical1"));
+		//modelAnim.SetFloat ("Run", Mathf.Abs(Input.GetAxis ("Horizontal")));
+		//modelAnim.SetFloat ("Aim", Input.GetAxis ("Vertical1"));
 		if (Input.GetAxis ("Horizontal") > 0.01f) {
 			playersp.flipX = true;
 		}
@@ -87,12 +89,6 @@ public class Player : MonoBehaviour {
             float z = Input.GetAxis("Vertical");
             transform.Translate(new Vector3(x, 0, z) * speed);
         }
-
-
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
-
-		transform.Translate (new Vector3 (x, 0, z) * speed);
 
         ///////////////// Aim /////////////////////
 
@@ -226,7 +222,7 @@ public class Player : MonoBehaviour {
             clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
             clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.right * Random.Range(-5.0f, 5.0f));
             StartCoroutine(DestroyBullet(clone));
-            StartCoroutine(CDShoot(1));
+            StartCoroutine(CDShoot(0.5f));
         }        
     }
 
@@ -273,7 +269,7 @@ public class Player : MonoBehaviour {
             StartCoroutine(DestroyBullet(clone2));
             StartCoroutine(DestroyBullet(clone3));
             StartCoroutine(DestroyBullet(clone4));
-            StartCoroutine(CDShoot(0.5f));
+            StartCoroutine(CDShoot(1f));
         }
     }
 
