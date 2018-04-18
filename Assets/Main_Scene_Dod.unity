@@ -9329,6 +9329,7 @@ GameObject:
   - component: {fileID: 753931506}
   - component: {fileID: 753931505}
   - component: {fileID: 753931504}
+  - component: {fileID: 753931509}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -9420,6 +9421,32 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &753931509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 753931503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5eb2c36f28fbbd048946f93ff6a785dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 1.25
+  bulletspeed: 300
+  Bullet: {fileID: 1884662928011594, guid: bad1fa8a28d912040854857360e9c146, type: 2}
+  life: 3
+  backplayer: {fileID: 0}
+  machete: {fileID: 21300000, guid: c21dcbf8204e4a84e96d51bd72edc391, type: 3}
+  pistol: {fileID: 21300000, guid: efc4e5798669cca4db814b3aee24120c, type: 3}
+  shotgun: {fileID: 21300000, guid: 2a26fc938ba9e6f4a9d8c7851ea81842, type: 3}
+  minigun: {fileID: 21300000, guid: 135314c83cd68e84b80495b1903b11ef, type: 3}
+  construct: 0
+  doorin: 0
+  doorout: 0
+  ammoPistol: 10
+  ammoAR: 100
+  ammoMG: 200
 --- !u!1001 &800505508
 Prefab:
   m_ObjectHideFlags: 0
