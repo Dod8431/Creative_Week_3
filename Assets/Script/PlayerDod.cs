@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerDod : MonoBehaviour {
 	public float speed;
@@ -16,7 +17,6 @@ public class PlayerDod : MonoBehaviour {
 	GameObject gun;
 	SpriteRenderer gunsp;
 	SpriteRenderer playersp;
-	public Sprite backplayer;
 	public Sprite machete;
 	public Sprite pistol;
 	public Sprite shotgun;
@@ -27,7 +27,7 @@ public class PlayerDod : MonoBehaviour {
 	bool activate = false;
 	public bool doorin;
 	public bool doorout;
-	public Animator modelAnim;
+	private Animator modelAnim;
 	private int timeIdle;
 	public int idleMinTime;
     public GameObject textmun;
@@ -35,11 +35,10 @@ public class PlayerDod : MonoBehaviour {
     Animator Mun;
     public GameObject pickMunSp;
     public GameObject planksp;
+    public GameObject ProgresseBar;
+    public GameObject ProgresseBarSliced;
+    public GameObject plankreserve;
     ///////// Weapons /////////
-    /*bool CAC = true;
-	bool Pistol = false;
-	bool AR = false;
-	bool MiniGun = false;*/
 
     bool CACSelect = true;
 	bool Pistolselect = false;
@@ -54,6 +53,7 @@ public class PlayerDod : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Mun = munpick.transform.parent.GetComponent<Animator>();
+        modelAnim = this.GetComponentInChildren<Animator> ();
 		Weapon = GameObject.Find("Gun");
 		Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
 		player = GameObject.Find("Model");
@@ -61,15 +61,15 @@ public class PlayerDod : MonoBehaviour {
 		gun = GameObject.Find("gunModel");
 		gunsp = gun.GetComponent<SpriteRenderer>();
 		lastAngle = Quaternion.Euler(90, 180, 180);
-		//Flip(gun);
 		lastAngle = Quaternion.Euler(90, 180, 180);
 		timeIdle = 0;
 	}
 		
 	void Update()
 	{
-		// ANIM //
-		modelAnim.SetFloat ("Run", Mathf.Abs(Input.GetAxis ("Horizontal")));
+        plankreserve.GetComponent<Text>().text = "" + plank;
+        // ANIM //
+        modelAnim.SetFloat ("Run", Mathf.Abs(Input.GetAxis ("Horizontal")));
 		modelAnim.SetFloat ("Run2", Input.GetAxis ("Vertical"));
 		modelAnim.SetFloat ("Aim", Input.GetAxis ("Vertical1"));
 		if (Input.GetAxis ("Horizontal") > 0.01f) {
@@ -86,6 +86,7 @@ public class PlayerDod : MonoBehaviour {
 		if (activate == true)
 		{
 			timer -= Time.deltaTime;
+            ProgresseBarSliced.GetComponent<SpriteRenderer>().size = new Vector2(timer*30/2,30);
 			Debug.Log(timer);
 		}
 
@@ -132,7 +133,6 @@ public class PlayerDod : MonoBehaviour {
 
 		if (yaim > 0)
 		{
-			playersp.sprite = backplayer;
 			gunsp.sortingOrder = 5;
 		}
 		else
@@ -404,7 +404,7 @@ public class PlayerDod : MonoBehaviour {
 			if (Input.GetButtonDown("Fire1"))
 			{
 				activate = true;
-
+                ProgresseBar.SetActive(true);
 			}
 
 			if (Input.GetButtonUp("Fire1")&&construct==false)
@@ -412,17 +412,20 @@ public class PlayerDod : MonoBehaviour {
 				activate = false;
 				timer = 2;
 				Debug.Log("cancel");
-			}
+                ProgresseBar.SetActive(false);
+            }
 			if (timer <= 0)
 			{
 				activate = false;
-				Debug.Log("bravo");
+                ProgresseBar.SetActive(false);
+                Debug.Log("bravo");
 				construct = true;
-				timer = 2;
 				plank -= 3;
                 pickMunSp.SetActive(false);
                 planksp.SetActive(true);
                 munpick.GetComponent<TextMesh>().text = "-3 Plank";
+                Mun.Play("PickUpMun");
+                timer = 2;
             }
 		}
 
