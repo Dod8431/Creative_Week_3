@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpriteShadow : MonoBehaviour {
 
-	public Vector3 offset = new Vector3 (0,0,0);
+	public Vector3 offset = new Vector3 (0,0,-10);
 
 	private SpriteRenderer sprRndCaster;
 	private SpriteRenderer sprRndShadow;
@@ -20,16 +20,18 @@ public class SpriteShadow : MonoBehaviour {
 		transCaster = transform;
 		transShadow = new GameObject ().transform;
 		transShadow.parent = transCaster;
-		transShadow.gameObject.name = "shadow";
-		transShadow.localRotation = Quaternion.Euler (new Vector3 (90, 0, -180));
+		transShadow.gameObject.name = "Shadow";
+		transShadow.localRotation = Quaternion.Euler (new Vector3 (90, 0, 0));
+		transShadow.localScale = new Vector3 (1, 1, 1);
 
 		sprRndCaster = GetComponent<SpriteRenderer> ();
 		sprRndShadow = transShadow.gameObject.AddComponent<SpriteRenderer> ();
 
-		sprRndShadow.material = shadowMaterial;
-		sprRndShadow.color = shadowColor;
+		sprRndShadow.material = transCaster.GetComponent<Renderer>().material;
+		sprRndShadow.color = new Color(0,0,0,0.5f);
 		sprRndShadow.sortingLayerName = sprRndCaster.sortingLayerName;
 		sprRndShadow.sortingOrder = sprRndCaster.sortingOrder - 1;
+		sprRndShadow.flipX = true;
 
 	}
 

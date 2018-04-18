@@ -28,6 +28,8 @@ public class PlayerDod : MonoBehaviour {
 	public bool doorin;
 	public bool doorout;
 	private Animator modelAnim;
+	private int timeIdle;
+	public int idleMinTime;
 
 	///////// Weapons /////////
 	/*bool CAC = true;
@@ -43,6 +45,7 @@ public class PlayerDod : MonoBehaviour {
 	public int ammoPistol =10;
 	public int ammoAR =100;
 	public int ammoMG =200;
+	public GameObject bulletRB;
 
 	// Use this for initialization
 	void Start () {
@@ -56,14 +59,12 @@ public class PlayerDod : MonoBehaviour {
 		lastAngle = Quaternion.Euler(90, 180, 180);
 		//Flip(gun);
 		lastAngle = Quaternion.Euler(90, 180, 180);
+		timeIdle = 0;
 	}
-
-	// Update is called once per frame
+		
 	void Update()
 	{
 		// ANIM //
-
-		Debug.Log (Input.GetAxisRaw ("Horizontal"));
 		modelAnim.SetFloat ("Run", Mathf.Abs(Input.GetAxis ("Horizontal")));
 		modelAnim.SetFloat ("Run2", Input.GetAxis ("Vertical"));
 		modelAnim.SetFloat ("Aim", Input.GetAxis ("Vertical1"));
@@ -89,19 +90,27 @@ public class PlayerDod : MonoBehaviour {
 		if (activate == false)
 		{
 			float x = Input.GetAxis("Horizontal");
-			float z = Input.GetAxis("Vertical");
-			transform.Translate(new Vector3(x, 0, z) * speed);
 			if (x > 0.01) {
 				x = x + speed;
 			}
+			float z = Input.GetAxis("Vertical");
+			if (z > 0.01) {
+				z = z + speed;
+			}
+			transform.Translate(new Vector3(x, 0, z) * speed);
 		}
 
 		if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.01f)
 		{
+			timeIdle = 0;
 			modelAnim.SetBool ("Running", true);
 		} else {
-			modelAnim.SetBool ("Running", false);
+			timeIdle++;
+			if (timeIdle > idleMinTime) {
+				modelAnim.SetBool ("Running", false);
+			}
 		}
+			
 		///////////////// Aim /////////////////////
 
 		float xaim = Input.GetAxis("Horizontal1");
@@ -217,7 +226,7 @@ public class PlayerDod : MonoBehaviour {
 			dirBullet = Quaternion.Euler(60, angle, 0f);
 			clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
 			clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up* bulletspeed);
-			StartCoroutine(DestroyBullet(clone));
+			StartCoroutine(DestroyBullet(clone,1f));
 			StartCoroutine(CDShoot(2));
 		}
 	}
@@ -233,7 +242,7 @@ public class PlayerDod : MonoBehaviour {
 			dirBullet = Quaternion.Euler(60, 0f, angle + 90);
 			clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
 			clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.right * Random.Range(-5.0f, 5.0f));
-			StartCoroutine(DestroyBullet(clone));
+			StartCoroutine(DestroyBullet(clone,1f));
 			StartCoroutine(CDShoot(1));
 		}        
 	}
@@ -276,11 +285,11 @@ public class PlayerDod : MonoBehaviour {
 			//
 			//transform.Translate(-Weapon.transform.TransformDirection(Vector3.right * 0.2f));
 
-			StartCoroutine(DestroyBullet(clone));
-			StartCoroutine(DestroyBullet(clone1));
-			StartCoroutine(DestroyBullet(clone2));
-			StartCoroutine(DestroyBullet(clone3));
-			StartCoroutine(DestroyBullet(clone4));
+			StartCoroutine(DestroyBullet(clone,1f));
+			StartCoroutine(DestroyBullet(clone1,1f));
+			StartCoroutine(DestroyBullet(clone2,1f));
+			StartCoroutine(DestroyBullet(clone3,1f));
+			StartCoroutine(DestroyBullet(clone4,1f));
 			StartCoroutine(CDShoot(0.5f));
 		}
 	}
@@ -292,19 +301,24 @@ public class PlayerDod : MonoBehaviour {
 			ammoMG -= 1;
 			canshoot = false;
 			GameObject clone;
+			GameObject cloneDouille;
 			Quaternion dirBullet;
 			dirBullet = Quaternion.Euler(60, 0f, angle+90);
 			clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
 			clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.right * Random.Range(-5.0f, 5.0f));
+
+			cloneDouille = Instantiate (bulletRB, Weapon.transform.position, dirBullet) as GameObject;
+			cloneDouille.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (250f, 500f), Random.Range (250f, 500f), Random.Range (250f, 500f)), ForceMode.Impulse);
 			//transform.Translate(-Weapon.transform.TransformDirection(Vector3.up * 1));
-			StartCoroutine(DestroyBullet(clone));
+			StartCoroutine(DestroyBullet(clone,1f));
+			StartCoroutine (DestroyBullet (cloneDouille, 10f));
 			StartCoroutine(CDShoot(0.1f));
 		}
 	}
 
-	IEnumerator DestroyBullet (GameObject bullet)
+	IEnumerator DestroyBullet (GameObject bullet, float time)
 	{
-		yield return new WaitForSeconds(1);
+		yield return new WaitForSeconds(time);
 		Destroy(bullet);
 	}
 
@@ -390,5 +404,5 @@ public class PlayerDod : MonoBehaviour {
 		Vector3 theScale = swap.transform.localScale;
 		theScale.y *= -1;
 		swap.transform.localScale = theScale;
-	}
+	} 
 }
