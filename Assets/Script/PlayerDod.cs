@@ -27,7 +27,7 @@ public class PlayerDod : MonoBehaviour {
 	bool activate = false;
 	public bool doorin;
 	public bool doorout;
-	private Animator modelAnim;
+	public Animator modelAnim;
 	private int timeIdle;
 	public int idleMinTime;
     public GameObject textmun;
@@ -54,7 +54,6 @@ public class PlayerDod : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Mun = munpick.transform.parent.GetComponent<Animator>();
-        modelAnim = this.GetComponentInChildren<Animator> ();
 		Weapon = GameObject.Find("Gun");
 		Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
 		player = GameObject.Find("Model");
