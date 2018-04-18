@@ -58,8 +58,6 @@ public class Player : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
-=======
 		// ANIM //
 		 
 		modelAnim.SetFloat ("Run", Mathf.Abs(Input.GetAxis ("Horizontal")));
@@ -75,7 +73,6 @@ public class Player : MonoBehaviour {
 
 		//
 
->>>>>>> f14ac91529e82119dfda14bb30856ffd12ee6110
         if (activate == true)
         {
             timer -= Time.deltaTime;
@@ -83,21 +80,19 @@ public class Player : MonoBehaviour {
         }
 
         ///////////////// Move /////////////////////
-<<<<<<< HEAD
+
         if (activate == false)
         {
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
             transform.Translate(new Vector3(x, 0, z) * speed);
         }
-=======
+
 
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
 
 		transform.Translate (new Vector3 (x, 0, z) * speed);
-
->>>>>>> f14ac91529e82119dfda14bb30856ffd12ee6110
 
         ///////////////// Aim /////////////////////
 
