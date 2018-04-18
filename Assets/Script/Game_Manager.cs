@@ -6,21 +6,26 @@ using UnityEngine.UI;
 public class Game_Manager : MonoBehaviour {
     public bool day = true;
     public bool night = false;
-    bool startday = false;
-    bool startnight = true;
+    bool startday = true;
+    bool startnight = false;
     public GameObject player;
-    public int daynumb;
+    public int daynumb =0;
     public Text daytxt;
     public int killnum;
     public Text killtxt;
+    public GameObject cycle;
+    float timer;
 
 	// Use this for initialization
 	void Start () {
-        StartCoroutine("Cycle");
     }
 	
 	// Update is called once per frame
 	void Update () {
+        timer += Time.deltaTime;
+        daytxt.text = "Day " + daynumb;
+        cycle.transform.rotation = Quaternion.Euler(60, 0, 90 + (timer * 180 / -60));
+
         if (day)
         {
             Dayfunction();
@@ -44,16 +49,8 @@ public class Game_Manager : MonoBehaviour {
         {
             Debug.Log("jour");
             daynumb += 1;
-            daytxt.text = "Day " + daynumb;
             startday = false;
-
 			player.GetComponent<PlayerDod>().life = 3;
-            StartCoroutine("Cycle");
-            startnight = true;
-			player.GetComponent<PlayerDod>().doorout = false;
-			player.GetComponent<PlayerDod>().doorin = true;
-
-            player.GetComponent<PlayerDod>().life = 3;
             StartCoroutine("Cycle");
             startnight = true;
             player.GetComponent<PlayerDod>().doorout = false;
