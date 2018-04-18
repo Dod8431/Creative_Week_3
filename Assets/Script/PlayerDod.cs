@@ -30,14 +30,18 @@ public class PlayerDod : MonoBehaviour {
 	private Animator modelAnim;
 	private int timeIdle;
 	public int idleMinTime;
-
-	///////// Weapons /////////
-	/*bool CAC = true;
+    public GameObject textmun;
+    public GameObject munpick;
+    Animator Mun;
+    public GameObject pickMunSp;
+    public GameObject planksp;
+    ///////// Weapons /////////
+    /*bool CAC = true;
 	bool Pistol = false;
 	bool AR = false;
 	bool MiniGun = false;*/
 
-	bool CACSelect = true;
+    bool CACSelect = true;
 	bool Pistolselect = false;
 	bool ARSelect = false;
 	bool MinigunSelect = false;
@@ -49,7 +53,8 @@ public class PlayerDod : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		modelAnim = this.GetComponentInChildren<Animator> ();
+        Mun = munpick.transform.parent.GetComponent<Animator>();
+        modelAnim = this.GetComponentInChildren<Animator> ();
 		Weapon = GameObject.Find("Gun");
 		Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
 		player = GameObject.Find("Model");
@@ -184,7 +189,9 @@ public class PlayerDod : MonoBehaviour {
 			ARSelect = false;
 			Pistolselect = false;
 			MinigunSelect = false;
-		}
+            textmun.GetComponent<TextMesh>().text = "∞";
+
+        }
 		if (Input.GetAxis("VerticalPad") < 0)
 		{
 			gunsp.sprite = shotgun;
@@ -193,7 +200,8 @@ public class PlayerDod : MonoBehaviour {
 			ARSelect = true;
 			Pistolselect = false;
 			MinigunSelect = false;
-		}
+            textmun.GetComponent<TextMesh>().text = ""+ammoAR;
+        }
 
 		if (Input.GetAxis("HorizontalPad") > 0)
 		{
@@ -203,7 +211,8 @@ public class PlayerDod : MonoBehaviour {
 			ARSelect = false;
 			Pistolselect = true;
 			MinigunSelect = false;
-		}
+            textmun.GetComponent<TextMesh>().text = "" + ammoPistol;
+        }
 
 		if (Input.GetAxis("HorizontalPad") < 0)
 		{
@@ -213,7 +222,8 @@ public class PlayerDod : MonoBehaviour {
 			ARSelect = false;
 			Pistolselect = false;
 			MinigunSelect = true;
-		}
+            textmun.GetComponent<TextMesh>().text = "" + ammoMG;
+        }
 	}
 
 	void ShootCAC()
@@ -338,25 +348,41 @@ public class PlayerDod : MonoBehaviour {
 		if (other.gameObject.tag =="Plank")
 		{
 			plank += 3;
-			Destroy(other.gameObject);
+            pickMunSp.SetActive(false);
+            planksp.SetActive(true);
+            munpick.GetComponent<TextMesh>().text = "+3 Plank";
+            Mun.Play("PickUpMun");
+            Destroy(other.gameObject);
 		}
 
 		if (other.gameObject.tag == "AmmoPistol")
 		{
 			ammoPistol += 10;
-			Destroy(other.gameObject);
+            pickMunSp.SetActive(true);
+            planksp.SetActive(false);
+            munpick.GetComponent<TextMesh>().text = "+15 Pistol";
+            Mun.Play("PickUpMun");
+            Destroy(other.gameObject);
 		}
 
 		if (other.gameObject.tag == "AmmoSG")
 		{
-			ammoAR += 5;
-			Destroy(other.gameObject);
+            pickMunSp.SetActive(true);
+            planksp.SetActive(false);
+            ammoAR += 5;
+            munpick.GetComponent<TextMesh>().text = "+5 ShotGun";
+            Mun.Play("PickUpMun");
+            Destroy(other.gameObject);
 		}
 
 		if (other.gameObject.tag == "AmmoMG")
 		{
-			ammoMG += 25;
-			Destroy(other.gameObject);
+            pickMunSp.SetActive(true);
+            planksp.SetActive(false);
+            ammoMG += 25;
+            munpick.GetComponent<TextMesh>().text = "+25 MiniGun";
+            Mun.Play ("PickUpMun");
+            Destroy(other.gameObject);
 		}
 
 		if (other.gameObject.tag == "Doorin"&& doorin)
@@ -394,7 +420,10 @@ public class PlayerDod : MonoBehaviour {
 				construct = true;
 				timer = 2;
 				plank -= 3;
-			}
+                pickMunSp.SetActive(false);
+                planksp.SetActive(true);
+                munpick.GetComponent<TextMesh>().text = "-3 Plank";
+            }
 		}
 
 	}
