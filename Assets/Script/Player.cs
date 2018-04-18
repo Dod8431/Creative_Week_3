@@ -54,7 +54,7 @@ public class Player : MonoBehaviour {
         playersp = player.GetComponent<SpriteRenderer>();
         gun = GameObject.Find("gunModel");
         gunsp = gun.GetComponent<SpriteRenderer>();
-       lastAngle = Quaternion.Euler(90, 180, 180);
+       	lastAngle = Quaternion.Euler(90, 180, 180);
         //Flip(gun);
 
     }
@@ -64,7 +64,9 @@ public class Player : MonoBehaviour {
     {
 		// ANIM //
 		 
+		Debug.Log (Input.GetAxisRaw ("Horizontal"));
 		modelAnim.SetFloat ("Run", Mathf.Abs(Input.GetAxis ("Horizontal")));
+		modelAnim.SetFloat ("Run2", Input.GetAxis ("Vertical"));
 		modelAnim.SetFloat ("Aim", Input.GetAxis ("Vertical1"));
 		if (Input.GetAxis ("Horizontal") > 0.01f) {
 			playersp.flipX = true;
@@ -85,11 +87,20 @@ public class Player : MonoBehaviour {
 
         ///////////////// Move /////////////////////
 
-        float x = Input.GetAxis("Horizontal");
+		float x = Input.GetAxis ("Horizontal");
+		if (x > 0.01) {
+			x = x + speed;
+		}
         float z = Input.GetAxis("Vertical");
 
 		transform.Translate (new Vector3 (x, 0, z) * speed);
 
+		if (Mathf.Abs(Input.GetAxis("Horizontal")) > 0.01f || Mathf.Abs(Input.GetAxis("Vertical")) > 0.01f)
+		{
+			modelAnim.SetBool ("Running", true);
+		} else {
+			modelAnim.SetBool ("Running", false);
+		}
 
         ///////////////// Aim /////////////////////
 
