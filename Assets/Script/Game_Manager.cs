@@ -42,11 +42,11 @@ public class Game_Manager : MonoBehaviour {
             Debug.Log("jour");
             daynumb += 1;
             startday = false;
-            player.GetComponent<Player>().life = 3;
+			player.GetComponent<PlayerDod>().life = 3;
             StartCoroutine("Cycle");
             startnight = true;
-            player.GetComponent<Player>().doorout = false;
-            player.GetComponent<Player>().doorin = true;
+			player.GetComponent<PlayerDod>().doorout = false;
+			player.GetComponent<PlayerDod>().doorin = true;
         }
     }
 
@@ -59,8 +59,8 @@ public class Game_Manager : MonoBehaviour {
             player.transform.position = new Vector3(0, 0, 0);
             StartCoroutine("Cycle");
             startday = true;
-            player.GetComponent<Player>().doorout = true;
-            player.GetComponent<Player>().doorin = false;
+            player.GetComponent<PlayerDod>().doorout = true;
+			player.GetComponent<PlayerDod>().doorin = false;
         }
         
         
