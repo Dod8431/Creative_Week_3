@@ -15,6 +15,8 @@ public class Game_Manager : MonoBehaviour {
     public Text killtxt;
     public GameObject cycle;
     float timer;
+    public GameObject ArrowDay;
+    public GameObject ArrowNight;
 
 	// Use this for initialization
 	void Start () {
@@ -55,7 +57,8 @@ public class Game_Manager : MonoBehaviour {
             startnight = true;
             player.GetComponent<PlayerDod>().doorout = false;
             player.GetComponent<PlayerDod>().doorin = true;
-
+            ArrowDay.SetActive(true);
+            ArrowNight.SetActive(false);
         }
     }
 
@@ -65,12 +68,13 @@ public class Game_Manager : MonoBehaviour {
         {
             Debug.Log("nuit");
             startnight = false;
-            player.transform.position = new Vector3(0, 0, 0);
             StartCoroutine("Cycle");
             startday = true;
             player.GetComponent<PlayerDod>().doorout = true;
 			player.GetComponent<PlayerDod>().doorin = false;
             player.GetComponent<PlayerDod>().doorin = false;
+            ArrowNight.SetActive(true);
+            ArrowDay.SetActive(false);
         }
         
         
