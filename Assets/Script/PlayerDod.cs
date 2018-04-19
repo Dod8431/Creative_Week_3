@@ -54,7 +54,7 @@ public class PlayerDod : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         Mun = munpick.transform.parent.GetComponent<Animator>();
-        modelAnim = this.GetComponentInChildren<Animator> ();
+        modelAnim = this.GetComponentInChildren<Animator>();
 		Weapon = GameObject.Find("Gun");
 		Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
 		player = GameObject.Find("Model");
@@ -235,8 +235,9 @@ public class PlayerDod : MonoBehaviour {
 			Quaternion dirBullet;
 			dirBullet = Quaternion.Euler(0f, 0f, 0f);
 			clone = Instantiate(meacheteHit, Weapon.transform.position, dirBullet) as GameObject;
-		    StartCoroutine(DestroyBullet(clone,0.2f));
-			StartCoroutine(CDShoot(1));
+		    StartCoroutine(DestroyBullet(clone,0.25f));
+            Weapon.transform.parent.GetComponent<Animator>().Play("Macheteanim");
+            StartCoroutine(CDShoot(1));
 		}
 	}
 
