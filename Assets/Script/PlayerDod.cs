@@ -55,7 +55,7 @@ public class PlayerDod : MonoBehaviour {
 	void Start () {
         Mun = munpick.transform.parent.GetComponent<Animator>();
         modelAnim = this.GetComponentInChildren<Animator>();
-		Weapon = GameObject.Find("Gun");
+        Weapon = GameObject.Find("Gun");
 		Weapon.transform.rotation = Quaternion.Euler(90, 0f, 90);
 		player = GameObject.Find("Model");
 		playersp = player.GetComponent<SpriteRenderer>();
@@ -64,7 +64,7 @@ public class PlayerDod : MonoBehaviour {
 		lastAngle = Quaternion.Euler(90, 180, 180);
 		lastAngle = Quaternion.Euler(90, 180, 180);
 		timeIdle = 0;
-	}
+    }
 		
 	void Update()
 	{
@@ -230,13 +230,12 @@ public class PlayerDod : MonoBehaviour {
 	{
 		if (canshoot == true)
 		{
-			canshoot = false;
+            canshoot = false;
 			GameObject clone;
 			Quaternion dirBullet;
 			dirBullet = Quaternion.Euler(0f, 0f, 0f);
 			clone = Instantiate(meacheteHit, Weapon.transform.position, dirBullet) as GameObject;
 		    StartCoroutine(DestroyBullet(clone,0.25f));
-            Weapon.transform.parent.GetComponent<Animator>().Play("Macheteanim");
             StartCoroutine(CDShoot(1));
 		}
 	}
