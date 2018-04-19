@@ -46,9 +46,30 @@ public class Zombie : MonoBehaviour {
         }
     }
 
+	void OnTriggerStay(Collider other)
+	{
+		if (other.tag == "Player") {
+			StartCoroutine (Hurt ());
+		}
+	}
+
+	void OnTriggerExit(Collider other)
+	{
+		if (other.tag == "Player") {
+			StopCoroutine (Hurt ());
+		}
+			
+	}
+
     IEnumerator Burn()
     {
         yield return new WaitForSeconds(1.5f);
         vie -= 1;
     }
+
+	IEnumerator Hurt()
+	{
+		yield return new WaitForSeconds (0.5f);
+		GameObject.Find ("Model").GetComponent<Animator> ().Play ("Player_Hurt");
+	}
 }
