@@ -38,6 +38,7 @@ public class PlayerDod : MonoBehaviour {
     public GameObject ProgresseBar;
     public GameObject ProgresseBarSliced;
     public GameObject plankreserve;
+    public GameObject meacheteHit;
     ///////// Weapons /////////
 
     bool CACSelect = true;
@@ -232,11 +233,10 @@ public class PlayerDod : MonoBehaviour {
 			canshoot = false;
 			GameObject clone;
 			Quaternion dirBullet;
-			dirBullet = Quaternion.Euler(60, angle, 0f);
-			clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
-			clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up* bulletspeed);
-			StartCoroutine(DestroyBullet(clone,1f));
-			StartCoroutine(CDShoot(2));
+			dirBullet = Quaternion.Euler(0f, 0f, 0f);
+			clone = Instantiate(meacheteHit, Weapon.transform.position, dirBullet) as GameObject;
+		    StartCoroutine(DestroyBullet(clone,0.2f));
+			StartCoroutine(CDShoot(1));
 		}
 	}
 

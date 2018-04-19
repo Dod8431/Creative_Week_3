@@ -44,6 +44,10 @@ public class Zombie : MonoBehaviour {
             vie -= 1;
             Destroy(other.gameObject);
         }
+        if (other.gameObject.tag == "Machete")
+        {
+            vie -= 1;
+           }
     }
 
     IEnumerator Burn()

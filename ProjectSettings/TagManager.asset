@@ -11,6 +11,7 @@ TagManager:
   - Zombie
   - Barricade
   - Bullet
+  - Machete
   layers:
   - Default
   - TransparentFX
