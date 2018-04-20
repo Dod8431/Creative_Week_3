@@ -27,4 +27,12 @@ public class Pause : MonoBehaviour {
             PauseUI.SetActive(false);
         }
         }
+
+    public void Resume()
+    {
+
+        Time.timeScale = 1.0f;
+        PauseUI.SetActive(false);
+        isPaused = false;
+    }
 }
