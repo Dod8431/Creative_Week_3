@@ -13,10 +13,16 @@ public class Zombie : MonoBehaviour {
 	private bool check_damage_Barrier;
 	public GameObject firstBarrierHit;
     // Use this for initialization
+    ///////// Audio/////
+    private AudioSource SourceAudio;
+    public AudioClip Sound_Scream;
+    public AudioClip Sound_Dead;
+    public GameObject DeadSound;
     void Start () {
         zombiesp = this.GetComponent<SpriteRenderer>();
         player = GameObject.Find("Player");
         GC = GameObject.Find("GameController");
+        SourceAudio = GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -32,6 +38,8 @@ public class Zombie : MonoBehaviour {
 
         if (vie <= 0)
         {
+            Instantiate(DeadSound, transform.position, transform.rotation);
+            SourceAudio.PlayOneShot(Sound_Dead);
             GC.GetComponent<Game_Manager>().killnum += 1;
             Destroy(this.gameObject);
         }
@@ -97,6 +105,7 @@ public class Zombie : MonoBehaviour {
 	IEnumerator Hurt()
 	{
 		check = true;
+        SourceAudio.PlayOneShot(Sound_Scream);
 		this.GetComponentInChildren<Animator> ().SetTrigger ("Attack");
 		GameObject.Find ("FX_Blood_Human").GetComponent<ParticleSystem> ().Play ();
 		yield return new WaitForSeconds (0.25f);
