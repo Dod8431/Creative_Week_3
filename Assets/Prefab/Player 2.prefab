@@ -489,7 +489,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1287126915635308}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.993656, y: 0, z: -7.5}
+  m_LocalPosition: {x: -3004.4937, y: 0, z: -59.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4476031469239510}
@@ -788,8 +788,8 @@ MonoBehaviour:
   munpick: {fileID: 1947066778889822}
   pickMunSp: {fileID: 1236019507578470}
   planksp: {fileID: 1007957242764190}
-  ProgresseBar: {fileID: 0}
-  ProgresseBarSliced: {fileID: 0}
+  ProgresseBar: {fileID: 1405388268876226}
+  ProgresseBarSliced: {fileID: 1692236775574656}
   plankreserve: {fileID: 0}
   meacheteHit: {fileID: 1965736037025842, guid: 8919f34dcf7392048bbcbf42516cc02d,
     type: 2}
@@ -797,6 +797,10 @@ MonoBehaviour:
   ammoAR: 100
   ammoMG: 200
   bulletRB: {fileID: 1933536906779212, guid: 6c8f9bf2fd94bb74ebe9b6a1fa349f38, type: 2}
+  Sound_Pistol: {fileID: 8300000, guid: 2e8abb0a0b1afb0438b0e941ec6f6a3d, type: 3}
+  Sound_Shotgun: {fileID: 8300000, guid: 96b587b9d25d8c444998bee951ff785d, type: 3}
+  Sound_MiniGun: {fileID: 8300000, guid: f9b2b9ef45f5863408e9e9d2db02e357, type: 3}
+  Sound_Cac: {fileID: 0}
 --- !u!114 &114274472352373356
 MonoBehaviour:
   m_ObjectHideFlags: 1
