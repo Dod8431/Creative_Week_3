@@ -57,6 +57,7 @@ public class PlayerDod : MonoBehaviour {
     public AudioClip Sound_Shotgun;
     public AudioClip Sound_MiniGun;
     public AudioClip Sound_Cac;
+    public AudioClip Sound_Build;
 
     // Use this for initialization
     void Start () {
@@ -419,6 +420,7 @@ public class PlayerDod : MonoBehaviour {
 			{
 				activate = true;
                 ProgresseBar.SetActive(true);
+                SourceAudio.PlayOneShot(Sound_Build);
 			}
 
 			if (Input.GetButtonUp("Fire1")&&construct==false)
