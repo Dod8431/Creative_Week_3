@@ -21,6 +21,7 @@ public class Game_Manager : MonoBehaviour {
     public GameObject ArrowNight;
 	public Color night_Color;
 	public GameObject GO;
+	public GameObject sound_Night;
 
 	// Use this for initialization
 	void Start () {
@@ -88,6 +89,7 @@ public class Game_Manager : MonoBehaviour {
             player.GetComponent<PlayerDod>().doorin = true;
 			player.transform.position = GameObject.Find ("TP_Day").transform.position;
             ArrowDay.SetActive(true);
+			sound_Night.SetActive (false);
             ArrowNight.SetActive(false);
 			DayLight ();
         }
@@ -108,6 +110,7 @@ public class Game_Manager : MonoBehaviour {
             ArrowNight.SetActive(true);
             ArrowDay.SetActive(false);
 			NightLight ();
+			sound_Night.SetActive (true);
 			StartCoroutine (WaitAndSpawn ());
         }
         
@@ -116,15 +119,29 @@ public class Game_Manager : MonoBehaviour {
 		
 	IEnumerator WaitAndSpawn()
 	{
-		yield return new WaitForSeconds (3f);
+		yield return new WaitForSeconds (5f);
 		GameObject.Find ("SpawnSouthEast").GetComponent<WaveSpawner> ().Spawn ();
+		yield return new WaitForSeconds (5f);
 		GameObject.Find ("SpawnSouthWest").GetComponent<WaveSpawner> ().Spawn ();
+		yield return new WaitForSeconds (5f);
 		GameObject.Find ("SpawnNorth").GetComponent<WaveSpawner> ().Spawn ();
-		yield return new WaitForSeconds (10f);
+		yield return new WaitForSeconds (5f);
 		GameObject.Find ("SpawnSouthEast").GetComponent<WaveSpawner> ().Spawn ();
-		yield return new WaitForSeconds (10f);
-		GameObject.Find ("SpawnNorth").GetComponent<WaveSpawner> ().Spawn ();
-		yield return new WaitForSeconds (10f);
+		yield return new WaitForSeconds (5f);
 		GameObject.Find ("SpawnSouthWest").GetComponent<WaveSpawner> ().Spawn ();
+		yield return new WaitForSeconds (5f);
+		GameObject.Find ("SpawnNorth").GetComponent<WaveSpawner> ().Spawn ();
+		yield return new WaitForSeconds (5f);
+		GameObject.Find ("SpawnSouthEast").GetComponent<WaveSpawner> ().Spawn ();
+		yield return new WaitForSeconds (5f);
+		GameObject.Find ("SpawnSouthWest").GetComponent<WaveSpawner> ().Spawn ();
+		yield return new WaitForSeconds (5f);
+		GameObject.Find ("SpawnNorth").GetComponent<WaveSpawner> ().Spawn ();
+		yield return new WaitForSeconds (5f);
+		GameObject.Find ("SpawnSouthEast").GetComponent<WaveSpawner> ().Spawn ();
+		yield return new WaitForSeconds (5f);
+		GameObject.Find ("SpawnSouthWest").GetComponent<WaveSpawner> ().Spawn ();
+		yield return new WaitForSeconds (5f);
+		GameObject.Find ("SpawnNorth").GetComponent<WaveSpawner> ().Spawn ();
 	}
 }

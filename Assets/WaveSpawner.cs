@@ -14,7 +14,7 @@ public class WaveSpawner : MonoBehaviour {
 
 	public void Spawn()
 	{
-		for (int i = 0; i < GC.daynumb * 2; i++) {
+		for (int i = 0; i < GC.daynumb; i++) {
 			Instantiate (zombie, this.transform.position, Quaternion.identity);
 		}
 	}
