@@ -51,8 +51,15 @@ public class PlayerDod : MonoBehaviour {
 	public int ammoMG =200;
 	public GameObject bulletRB;
 
-	// Use this for initialization
-	void Start () {
+    ///////// Audio/////
+    private AudioSource SourceAudio;
+    public AudioClip Sound_Pistol;
+    public AudioClip Sound_Shotgun;
+    public AudioClip Sound_MiniGun;
+    public AudioClip Sound_Cac;
+
+    // Use this for initialization
+    void Start () {
         Mun = munpick.transform.parent.GetComponent<Animator>();
         modelAnim = this.GetComponentInChildren<Animator>();
         Weapon = GameObject.Find("Gun");
@@ -64,6 +71,7 @@ public class PlayerDod : MonoBehaviour {
 		lastAngle = Quaternion.Euler(90, 180, 180);
 		lastAngle = Quaternion.Euler(90, 180, 180);
 		timeIdle = 0;
+        SourceAudio = GetComponent<AudioSource>();
     }
 		
 	void Update()
@@ -244,7 +252,8 @@ public class PlayerDod : MonoBehaviour {
 	{
 		if (canshoot == true && ammoPistol>0)
 		{
-			gun.GetComponentInChildren<Animator> ().Play ("Fireshot");
+            SourceAudio.PlayOneShot(Sound_Pistol);
+            gun.GetComponentInChildren<Animator> ().Play ("Fireshot");
 			ammoPistol -= 1;
             textmun.GetComponent<TextMesh>().text = "" + ammoPistol;
             canshoot = false;
@@ -262,7 +271,8 @@ public class PlayerDod : MonoBehaviour {
 	{
 		if (canshoot == true && ammoAR >0)
 		{
-			gun.GetComponentInChildren<Animator> ().Play ("Fireshot");
+            SourceAudio.PlayOneShot(Sound_Shotgun);
+            gun.GetComponentInChildren<Animator> ().Play ("Fireshot");
 			ammoAR -= 5;
 			canshoot = false;
 			GameObject clone;
@@ -310,7 +320,8 @@ public class PlayerDod : MonoBehaviour {
 	{
 		if (canshoot == true && ammoMG >0)
 		{
-			ammoMG -= 1;
+            SourceAudio.PlayOneShot(Sound_MiniGun);
+            ammoMG -= 1;
 			canshoot = false;
 			GameObject clone;
             textmun.GetComponent<TextMesh>().text = "" + ammoMG;
