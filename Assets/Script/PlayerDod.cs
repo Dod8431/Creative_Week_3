@@ -51,8 +51,15 @@ public class PlayerDod : MonoBehaviour {
 	public int ammoMG =200;
 	public GameObject bulletRB;
 
-	// Use this for initialization
-	void Start () {
+    ///////// Audio/////
+    private AudioSource SourceAudio;
+    public AudioClip Sound_Pistol;
+    public AudioClip Sound_Shotgun;
+    public AudioClip Sound_MiniGun;
+    public AudioClip Sound_Cac;
+
+    // Use this for initialization
+    void Start () {
         Mun = munpick.transform.parent.GetComponent<Animator>();
         modelAnim = this.GetComponentInChildren<Animator>();
         Weapon = GameObject.Find("Gun");
@@ -64,6 +71,7 @@ public class PlayerDod : MonoBehaviour {
 		lastAngle = Quaternion.Euler(90, 180, 180);
 		lastAngle = Quaternion.Euler(90, 180, 180);
 		timeIdle = 0;
+        SourceAudio = GetComponent<AudioSource>();
     }
 		
 	void Update()
@@ -87,7 +95,7 @@ public class PlayerDod : MonoBehaviour {
 		if (activate == true)
 		{
 			timer -= Time.deltaTime;
-            ProgresseBarSliced.GetComponent<SpriteRenderer>().size = new Vector2(timer*30/2,30);
+            ProgresseBarSliced.GetComponent<SpriteRenderer>().size = new Vector2(-timer*30/2+30,30);
 			Debug.Log(timer);
 		}
 
@@ -244,6 +252,8 @@ public class PlayerDod : MonoBehaviour {
 	{
 		if (canshoot == true && ammoPistol>0)
 		{
+            SourceAudio.PlayOneShot(Sound_Pistol);
+            gun.GetComponentInChildren<Animator> ().Play ("Fireshot");
 			ammoPistol -= 1;
             textmun.GetComponent<TextMesh>().text = "" + ammoPistol;
             canshoot = false;
@@ -261,7 +271,9 @@ public class PlayerDod : MonoBehaviour {
 	{
 		if (canshoot == true && ammoAR >0)
 		{
-			ammoAR -= 1;
+            SourceAudio.PlayOneShot(Sound_Shotgun);
+            gun.GetComponentInChildren<Animator> ().Play ("Fireshot");
+			ammoAR -= 5;
 			canshoot = false;
 			GameObject clone;
 			Quaternion dirBullet;
@@ -308,7 +320,8 @@ public class PlayerDod : MonoBehaviour {
 	{
 		if (canshoot == true && ammoMG >0)
 		{
-			ammoMG -= 1;
+            SourceAudio.PlayOneShot(Sound_MiniGun);
+            ammoMG -= 1;
 			canshoot = false;
 			GameObject clone;
             textmun.GetComponent<TextMesh>().text = "" + ammoMG;
@@ -316,6 +329,7 @@ public class PlayerDod : MonoBehaviour {
 			Quaternion dirBullet;
 			dirBullet = Quaternion.Euler(60, 0f, angle+90);
 			clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
+			gun.GetComponentInChildren<Animator> ().Play ("Fireshot");
 			clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.right * Random.Range(-5.0f, 5.0f));
 			cloneDouille = Instantiate (bulletRB, Weapon.transform.position, dirBullet) as GameObject;
 			cloneDouille.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (250f, 500f), Random.Range (250f, 500f), Random.Range (250f, 500f)), ForceMode.Impulse);
@@ -340,7 +354,7 @@ public class PlayerDod : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.tag == "Zombie")
+		if (other.gameObject.tag == "Zombie" || other.gameObject.tag == "ZombiePlayer")
 		{
 			life -= 1;
 		}
@@ -369,7 +383,7 @@ public class PlayerDod : MonoBehaviour {
 		{
             pickMunSp.SetActive(true);
             planksp.SetActive(false);
-            ammoAR += 5;
+            ammoAR += 25;
             munpick.GetComponent<TextMesh>().text = "+5 ShotGun";
             Mun.Play("PickUpMun");
             Destroy(other.gameObject);
@@ -379,7 +393,7 @@ public class PlayerDod : MonoBehaviour {
 		{
             pickMunSp.SetActive(true);
             planksp.SetActive(false);
-            ammoMG += 25;
+            ammoMG += 35;
             munpick.GetComponent<TextMesh>().text = "+25 MiniGun";
             Mun.Play ("PickUpMun");
             Destroy(other.gameObject);
@@ -398,7 +412,7 @@ public class PlayerDod : MonoBehaviour {
 	void OnTriggerStay (Collider other)
 	{
 
-		if (other.gameObject.tag == "Barricade" && construct == false && plank>2)
+		if (other.gameObject.tag == "Barrier" && construct == false && plank>2 && other.gameObject.GetComponent<Barrier>().life < 30)
 		{
 			
 			if (Input.GetButtonDown("Fire1"))
@@ -426,6 +440,8 @@ public class PlayerDod : MonoBehaviour {
                 munpick.GetComponent<TextMesh>().text = "-3 Plank";
                 Mun.Play("PickUpMun");
                 timer = 2;
+				other.gameObject.GetComponent<Barrier> ().life = 30;
+				construct = false;
             }
 		}
 
