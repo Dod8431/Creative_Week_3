@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Pause : MonoBehaviour {
-    bool isPaused = false;
+    public bool isPaused = false;
     public GameObject PauseUI;
 	// Use this for initialization
 	void Start () {

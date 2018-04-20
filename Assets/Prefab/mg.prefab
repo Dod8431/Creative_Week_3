@@ -22,7 +22,6 @@ GameObject:
   - component: {fileID: 33005489121590542}
   - component: {fileID: 65835495238471388}
   - component: {fileID: 23938176462142362}
-  - component: {fileID: 114737053279319330}
   m_Layer: 0
   m_Name: mg
   m_TagString: AmmoMG
@@ -144,17 +143,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114737053279319330
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1684150353081200}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e134ace84a1ce194a9feb0dc8f1e9f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!212 &212889181828573712
 SpriteRenderer:
   m_ObjectHideFlags: 1
