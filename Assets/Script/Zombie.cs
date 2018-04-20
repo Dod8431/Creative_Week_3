@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using BehaviorDesigner.Runtime;
 
 public class Zombie : MonoBehaviour {
     SpriteRenderer zombiesp;
     public GameObject player;
     public int vie = 3;
     public GameObject GC;
+	private bool check;
+	private bool check_damage_Barrier;
+	public GameObject firstBarrierHit;
     // Use this for initialization
     void Start () {
         zombiesp = this.GetComponent<SpriteRenderer>();
@@ -35,6 +40,14 @@ public class Zombie : MonoBehaviour {
         {
             StartCoroutine(Burn());
         }
+
+		this.GetComponentInChildren<Animator> ().SetFloat ("Run", Mathf.Abs(this.GetComponent<NavMeshAgent>().velocity.x));
+		this.GetComponentInChildren<Animator> ().SetFloat ("Run", Mathf.Abs(this.GetComponent<NavMeshAgent>().velocity.z));
+
+		if (firstBarrierHit.GetComponent<Barrier> ().life <= 0) {
+			this.GetComponent<BehaviorTree> ().SetVariableValue ("barrierDestroy", true);
+		}
+
 	}
 
     void OnTriggerEnter(Collider other)
@@ -47,13 +60,23 @@ public class Zombie : MonoBehaviour {
         if (other.gameObject.tag == "Machete")
         {
             vie -= 1;
-           }
+        }
+
     }
 
 	void OnTriggerStay(Collider other)
 	{
 		if (other.tag == "Player") {
-			StartCoroutine (Hurt ());
+			if (check == false) {
+				StartCoroutine (Hurt ());
+			}
+		}
+
+		if (other.gameObject.tag == "Barrier") {
+			firstBarrierHit = other.gameObject;
+			if (check_damage_Barrier == false) {
+				StartCoroutine (BarrierHurt (other.gameObject));
+			}
 		}
 	}
 
@@ -73,7 +96,26 @@ public class Zombie : MonoBehaviour {
 
 	IEnumerator Hurt()
 	{
-		yield return new WaitForSeconds (0.5f);
-		GameObject.Find ("Model").GetComponent<Animator> ().Play ("Player_Hurt");
+		check = true;
+		this.GetComponentInChildren<Animator> ().SetTrigger ("Attack");
+		GameObject.Find ("FX_Blood_Human").GetComponent<ParticleSystem> ().Play ();
+		yield return new WaitForSeconds (0.25f);
+		GameObject.Find ("Model").GetComponent<SpriteRenderer> ().color = Color.red;
+		yield return new WaitForSeconds (0.25f);
+		GameObject.Find ("Model").GetComponent<SpriteRenderer> ().color = Color.white;
+		GameObject.Find ("Player").GetComponent<PlayerDod> ().life -= 1;
+		GameObject.Find ("FX_Blood_Human").GetComponent<ParticleSystem> ().Stop ();
+		check = false;
 	}
+
+	IEnumerator BarrierHurt(GameObject barrier)
+	{
+		check_damage_Barrier = true;
+		this.GetComponentInChildren<Animator> ().SetTrigger ("Attack");
+		yield return new WaitForSeconds (2);
+		barrier.GetComponent<Barrier> ().life -= 1;
+		check_damage_Barrier = false;
+
+	}
+		
 }

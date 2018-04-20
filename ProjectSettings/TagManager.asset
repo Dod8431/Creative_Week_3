@@ -12,6 +12,9 @@ TagManager:
   - Barricade
   - Bullet
   - Machete
+  - Barrier
+  - ZombiePlayer
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -22,8 +25,8 @@ TagManager:
   - 
   - 
   - Decoration
-  - 
-  - 
+  - Barrier
+  - Player
   - 
   - 
   - 
