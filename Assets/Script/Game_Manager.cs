@@ -20,6 +20,7 @@ public class Game_Manager : MonoBehaviour {
     public GameObject ArrowDay;
     public GameObject ArrowNight;
 	public Color night_Color;
+	public GameObject GO;
 
 	// Use this for initialization
 	void Start () {
@@ -39,6 +40,10 @@ public class Game_Manager : MonoBehaviour {
             Nightfunction();
         }
         killtxt.text = ""+killnum;
+
+		if(player.GetComponent<PlayerDod>().life ==0){
+			GO.SetActive (true);
+		}
     }
 
     IEnumerator Cycle()
