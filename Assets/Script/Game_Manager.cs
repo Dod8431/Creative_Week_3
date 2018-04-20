@@ -125,7 +125,6 @@ public class Game_Manager : MonoBehaviour {
 		GameObject.Find ("SpawnSouthWest").GetComponent<WaveSpawner> ().Spawn ();
 		yield return new WaitForSeconds (5f);
 		GameObject.Find ("SpawnNorth").GetComponent<WaveSpawner> ().Spawn ();
-<<<<<<< HEAD
 		yield return new WaitForSeconds (5f);
 		GameObject.Find ("SpawnSouthEast").GetComponent<WaveSpawner> ().Spawn ();
 		yield return new WaitForSeconds (5f);
@@ -144,7 +143,5 @@ public class Game_Manager : MonoBehaviour {
 		GameObject.Find ("SpawnSouthWest").GetComponent<WaveSpawner> ().Spawn ();
 		yield return new WaitForSeconds (5f);
 		GameObject.Find ("SpawnNorth").GetComponent<WaveSpawner> ().Spawn ();
-=======
->>>>>>> f523f3065b714be7d5248125cd424f2b212ea584
 	}
 }

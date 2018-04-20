@@ -11,7 +11,6 @@ public class Zombie : MonoBehaviour {
     public GameObject GC;
 	private bool check;
 	private bool check_damage_Barrier;
-	public GameObject firstBarrierHit;
     // Use this for initialization
     ///////// Audio/////
     private AudioSource SourceAudio;
@@ -52,10 +51,6 @@ public class Zombie : MonoBehaviour {
 		this.GetComponentInChildren<Animator> ().SetFloat ("Run", Mathf.Abs(this.GetComponent<NavMeshAgent>().velocity.x));
 		this.GetComponentInChildren<Animator> ().SetFloat ("Run", Mathf.Abs(this.GetComponent<NavMeshAgent>().velocity.z));
 
-		if (firstBarrierHit.GetComponent<Barrier> ().life <= 0) {
-			this.GetComponent<BehaviorTree> ().SetVariableValue ("barrierDestroy", true);
-		}
-
 	}
 
     void OnTriggerEnter(Collider other)
@@ -81,7 +76,6 @@ public class Zombie : MonoBehaviour {
 		}
 
 		if (other.gameObject.tag == "Barrier") {
-			firstBarrierHit = other.gameObject;
 			if (check_damage_Barrier == false) {
 				StartCoroutine (BarrierHurt (other.gameObject));
 			}

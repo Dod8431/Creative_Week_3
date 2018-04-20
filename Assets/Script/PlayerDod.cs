@@ -258,11 +258,15 @@ public class PlayerDod : MonoBehaviour {
             textmun.GetComponent<TextMesh>().text = "" + ammoPistol;
             canshoot = false;
 			GameObject clone;
+			GameObject cloneDouille;
 			Quaternion dirBullet;
 			dirBullet = Quaternion.Euler(60, 0f, angle + 90);
 			clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
 			clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.right * Random.Range(-5.0f, 5.0f));
+			cloneDouille = Instantiate (bulletRB, Weapon.transform.position, dirBullet) as GameObject;
+			cloneDouille.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (250f, 500f), Random.Range (250f, 500f), Random.Range (250f, 500f)), ForceMode.Impulse);
 			StartCoroutine(DestroyBullet(clone,1f));
+			StartCoroutine (DestroyBullet (cloneDouille, 10f));
 			StartCoroutine(CDShoot(0.5f));
 		}        
 	}
@@ -276,34 +280,49 @@ public class PlayerDod : MonoBehaviour {
 			ammoAR -= 5;
 			canshoot = false;
 			GameObject clone;
+			GameObject cloneDouille;
 			Quaternion dirBullet;
 			dirBullet = Quaternion.Euler(60, 0f, angle+90);
 			clone = Instantiate(Bullet, Weapon.transform.position, dirBullet) as GameObject;
 			clone.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed)+ Weapon.transform.TransformDirection(Vector3.forward * Random.Range(-5.0f, 5.0f));
+			cloneDouille = Instantiate (bulletRB, Weapon.transform.position, dirBullet) as GameObject;
+			cloneDouille.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (250f, 500f), Random.Range (250f, 500f), Random.Range (250f, 500f)), ForceMode.Impulse);
 			///
 			GameObject clone1;
+			GameObject cloneDouille1;
 			Quaternion dirBullet1;
 			dirBullet1 = Quaternion.Euler(60, 0f, angle + 90);
 			clone1 = Instantiate(Bullet, Weapon.transform.position, dirBullet1) as GameObject;
 			clone1.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed)+ Weapon.transform.TransformDirection(Vector3.forward * Random.Range(5.0f, 18.0f));
+			cloneDouille1 = Instantiate (bulletRB, Weapon.transform.position, dirBullet) as GameObject;
+			cloneDouille1.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (250f, 500f), Random.Range (250f, 500f), Random.Range (250f, 500f)), ForceMode.Impulse);
 			///
 			GameObject clone2;
+			GameObject cloneDouille2;
 			Quaternion dirBullet2;
 			dirBullet2 = Quaternion.Euler(60, 0f, angle + 90);
 			clone2 = Instantiate(Bullet, Weapon.transform.position, dirBullet2) as GameObject;
 			clone2.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.back* Random.Range(5.0f, 18.0f));
+			cloneDouille2 = Instantiate (bulletRB, Weapon.transform.position, dirBullet) as GameObject;
+			cloneDouille2.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (250f, 500f), Random.Range (250f, 500f), Random.Range (250f, 500f)), ForceMode.Impulse);
 			///
 			GameObject clone3;
+			GameObject cloneDouille3;
 			Quaternion dirBullet3;
 			dirBullet3 = Quaternion.Euler(60, 0f, angle + 90);
 			clone3 = Instantiate(Bullet, Weapon.transform.position, dirBullet3) as GameObject;
 			clone3.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.back * Random.Range(22.0f, 30.0f));
+			cloneDouille3 = Instantiate (bulletRB, Weapon.transform.position, dirBullet) as GameObject;
+			cloneDouille3.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (250f, 500f), Random.Range (250f, 500f), Random.Range (250f, 500f)), ForceMode.Impulse);
 			///
 			GameObject clone4;
+			GameObject cloneDouille4;
 			Quaternion dirBullet4;
 			dirBullet4 = Quaternion.Euler(60, 0f, angle + 90);
 			clone4 = Instantiate(Bullet, Weapon.transform.position, dirBullet4) as GameObject;
 			clone4.GetComponent<Rigidbody>().velocity = Weapon.transform.TransformDirection(Vector3.up * bulletspeed) + Weapon.transform.TransformDirection(Vector3.forward * Random.Range(22.0f, 30.0f));
+			cloneDouille4 = Instantiate (bulletRB, Weapon.transform.position, dirBullet) as GameObject;
+			cloneDouille4.GetComponent<Rigidbody> ().AddForce (new Vector3 (Random.Range (250f, 500f), Random.Range (250f, 500f), Random.Range (250f, 500f)), ForceMode.Impulse);
             //
             //transform.Translate(-Weapon.transform.TransformDirection(Vector3.right * 0.2f));
             textmun.GetComponent<TextMesh>().text = "" + ammoAR;
@@ -312,6 +331,11 @@ public class PlayerDod : MonoBehaviour {
 			StartCoroutine(DestroyBullet(clone2,1f));
 			StartCoroutine(DestroyBullet(clone3,1f));
 			StartCoroutine(DestroyBullet(clone4,1f));
+			StartCoroutine (DestroyBullet (cloneDouille, 10f));
+			StartCoroutine (DestroyBullet (cloneDouille1, 10f));
+			StartCoroutine (DestroyBullet (cloneDouille2, 10f));
+			StartCoroutine (DestroyBullet (cloneDouille3, 10f));
+			StartCoroutine (DestroyBullet (cloneDouille4, 10f));
 			StartCoroutine(CDShoot(1));
 		}
 	}
