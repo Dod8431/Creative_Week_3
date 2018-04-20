@@ -41,6 +41,7 @@ public class Zombie : MonoBehaviour {
             StartCoroutine(Burn());
         }
 
+
 		this.GetComponentInChildren<Animator> ().SetFloat ("Run", Mathf.Abs(this.GetComponent<NavMeshAgent>().velocity.x));
 		this.GetComponentInChildren<Animator> ().SetFloat ("Run", Mathf.Abs(this.GetComponent<NavMeshAgent>().velocity.z));
 
