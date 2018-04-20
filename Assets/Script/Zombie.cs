@@ -39,7 +39,6 @@ public class Zombie : MonoBehaviour {
         if (vie <= 0)
         {
             Instantiate(DeadSound, transform.position, transform.rotation);
-            SourceAudio.PlayOneShot(Sound_Dead);
             GC.GetComponent<Game_Manager>().killnum += 1;
             Destroy(this.gameObject);
         }
@@ -48,6 +47,7 @@ public class Zombie : MonoBehaviour {
         {
             StartCoroutine(Burn());
         }
+
 
 		this.GetComponentInChildren<Animator> ().SetFloat ("Run", Mathf.Abs(this.GetComponent<NavMeshAgent>().velocity.x));
 		this.GetComponentInChildren<Animator> ().SetFloat ("Run", Mathf.Abs(this.GetComponent<NavMeshAgent>().velocity.z));
@@ -105,7 +105,7 @@ public class Zombie : MonoBehaviour {
 	IEnumerator Hurt()
 	{
 		check = true;
-        SourceAudio.PlayOneShot(Sound_Scream);
+        SourceAudio.PlayOneShot(Sound_Dead);
 		this.GetComponentInChildren<Animator> ().SetTrigger ("Attack");
 		GameObject.Find ("FX_Blood_Human").GetComponent<ParticleSystem> ().Play ();
 		yield return new WaitForSeconds (0.25f);
